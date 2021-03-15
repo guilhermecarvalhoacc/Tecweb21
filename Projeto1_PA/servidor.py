@@ -20,11 +20,12 @@ while True:
 
     request = client_connection.recv(1024).decode()
 
-    print(f"ESSE AKI EH UM REQUEST: {request}")
+    if request.startswith("POST"):
+        print(f"ESSE AKI EH UM REQUEST: {request}")
 
     route = extract_route(request)
     extensao = os.path.splitext(request)[1]
-    print(f"extensao: {route}")
+   # print(f"extensao: {route}")
 
     filepath = CUR_DIR / route
     if filepath.is_file():

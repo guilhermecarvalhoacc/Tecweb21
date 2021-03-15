@@ -2,7 +2,6 @@ import os
 import json
 
 def extract_route(req):
-    print(req.split())
     return req.split()[1][1:]
 
 

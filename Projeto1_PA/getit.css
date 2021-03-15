@@ -245,3 +245,9 @@ body {
   background-color: #fae890;
   transform: rotate(9deg);
 }
+
+.card_delete{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}

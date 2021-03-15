@@ -20,13 +20,18 @@ def index(request):
         lista_post = []
         for chave_valor in corpo.split('&'):
             lista = urllib.parse.unquote_plus(chave_valor).split("=")
-            print(f"ESSA AKI EH A LISTA: {lista}")
-            print(f"\n\n {chave_valor}")
+           # print(f"ESSA AKI EH A LISTA: {lista}")
+            #print(f"\n\n {chave_valor}")
             lista_post.append(lista[1])
             # AQUI É COM VOCÊ
-        print(f"PARAMS EH: {corpo}")
-        
-        database.add(Note(title= lista_post[0], content= lista_post[1]))
+
+     #   print(f"PARAMS EH: {corpo}")
+        if ((request.split()[-1]).split("&")[0]).split("=")[0] != "inputname":
+            database.add(Note(title= lista_post[0], content= lista_post[1]))
+        elif ((request.split()[-1]).split("&")[0]).split("=")[0] == "inputname":
+            id = ((request.split()[-1]).split("&")[0]).split("=")[1]
+            database.delete(id)
+
         return build_response(code=303, reason='See Other', headers='Location: /') 
 
         
@@ -36,7 +41,7 @@ def index(request):
     else:
         note_template = load_template('components/note.html')
         notes_li = [
-            note_template.format(title=dados.title, details=dados.content)
+            note_template.format(title=dados.title, details=dados.content,id = dados.id)
             for dados in database.get_all()
         ]
         notes = '\n'.join(notes_li)
