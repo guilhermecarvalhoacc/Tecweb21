@@ -1,6 +1,6 @@
 import socket
 from pathlib import Path
-from utils import extract_route, read_file, build_response
+from utils import extract_route, load_template, read_file, build_response
 from views import index
 import os
 
@@ -33,7 +33,7 @@ while True:
     elif route == '':
         response = index(request)
     else:
-        response = build_response()
+        response = build_response() + load_template("404.html").encode()
 
     client_connection.sendall(response)
 

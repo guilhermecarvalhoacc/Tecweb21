@@ -2,15 +2,16 @@ import os
 import json
 
 def extract_route(req):
+    #na requisição ele retira a "/"
     return req.split()[1][1:]
 
 
 def read_file(path):
-    nome1,nome2 = os.path.splitext(path)
+    file_name,file_extensao = os.path.splitext(path)
 
     lista_arq = [".txt", ".html", ".css",".js"]
 
-    if nome2 in lista_arq:
+    if file_extensao in lista_arq:
         f = open(path, "rt")
         return f.read().encode(encoding="utf-8")
     else:
